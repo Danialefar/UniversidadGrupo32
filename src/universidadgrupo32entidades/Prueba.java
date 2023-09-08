@@ -11,4 +11,6 @@ package universidadgrupo32entidades;
  */
 public class Prueba {
     private int numero;
+    private String nombre;
+    
 }
