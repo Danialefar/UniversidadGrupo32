@@ -5,6 +5,9 @@
  */
 package universidadgrupo32;
 
+import java.sql.Connection;
+import universidadgrupo32accesoDatos.Conexion;
+
 /**
  *
  * @author vvted
@@ -15,7 +18,8 @@ public class UniversidadGrupo32 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Connection con = Conexion.getConexion();
     }
     
 }
