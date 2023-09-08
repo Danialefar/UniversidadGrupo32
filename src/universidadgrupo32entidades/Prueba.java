@@ -10,5 +10,5 @@ package universidadgrupo32entidades;
  * @author vvted
  */
 public class Prueba {
-    
+    private int numero;
 }
