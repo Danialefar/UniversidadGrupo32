@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/nbproject/genfiles.properties</file>
             <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32accesoDatos/Conexion.java</file>
             <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32entidades/Alumno.java</file>
@@ -10,6 +11,11 @@
             <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/nbproject/project.properties</file>
             <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32entidades/Inscripcion.java</file>
             <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32entidades/Materia.java</file>
+=======
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/UniversidadGrupo32/src/universidadgrupo32accesoDatos/MateriaData.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/UniversidadGrupo32/src/universidadgrupo32accesoDatos/InscripcionData.java</file>
+            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/UniversidadGrupo32/src/universidadgrupo32accesoDatos/AlumnoData.java</file>
+>>>>>>> 4c698ecca5d10189aad3e13bddf13f618e8f7c2e
         </group>
     </open-files>
 </project-private>
