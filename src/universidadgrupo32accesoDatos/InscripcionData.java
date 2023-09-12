@@ -19,12 +19,12 @@ public class InscripcionData {
     }
      private Connection con = null;
      
-     public void guardarInscripcion(Inscripcion inscripcion) throws SQLException{
+     public void guardarInscripcion(Inscripcion inscripcion) {
          String sql= "INSERT INTO inscripcion (idMateria, idAlumno, nota)"
                 + "VALUES (?,?,?)";
         
-        try 
-            (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,inscripcion.getMateria().getIdMateria());
             ps.setInt(2, inscripcion.getAlumno().getIdAlumno());
             ps.setDouble(3, inscripcion.getNota());
@@ -35,14 +35,11 @@ public class InscripcionData {
             
             if(rs.next()){
                 int idIscripcion = rs.getInt("idIscripcion");
-                Alumno encontrarAlumno = inscripcion.getAlumno(idAlumno);
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
-                inscripcion.setAlumno(rs.getInt("idAlumno"));
                 JOptionPane.showMessageDialog(null, "ISCRIPCION AÑADIDA CON EXITO");
             }
             ps.close();
         }catch(SQLException ex){
-        JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA ISCRIPCION" + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" + ex.getMessage());
         }
          
          
