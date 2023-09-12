@@ -5,17 +5,26 @@
  */
 package universidadgrupo32;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Emiliano
  */
 public class GestionDeInscripciones extends javax.swing.JInternalFrame {
-
+private final DefaultTableModel modelo=new DefaultTableModel(){
+    @Override
+    public boolean isCellEditable(int f, int c){
+        return false;
+    }
+};
+   
     /**
      * Creates new form GestionDeInscripciones
      */
     public GestionDeInscripciones() {
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -35,7 +44,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTinscripcion = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -59,7 +68,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
 
         jRadioButton2.setText("Materias no Inscriptas");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTinscripcion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,8 +79,8 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setToolTipText("");
-        jScrollPane1.setViewportView(jTable1);
+        jTinscripcion.setToolTipText("");
+        jScrollPane1.setViewportView(jTinscripcion);
 
         jButton1.setText("Inscribir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +180,18 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
-
+private void armarCabecera(){
+    modelo.addColumn("ID");
+    modelo.addColumn("Nombre");
+    modelo.addColumn("Año");
+    jTinscripcion.setModel(modelo);
+}
+private void borrarFilas(){
+    int f=jTinscripcion.getRowCount()-1;
+    for( ;f>=0;f--   ){
+        modelo.removeRow(f);
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -185,6 +205,6 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTinscripcion;
     // End of variables declaration//GEN-END:variables
 }
