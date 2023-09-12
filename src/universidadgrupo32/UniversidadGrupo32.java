@@ -20,6 +20,13 @@ public class UniversidadGrupo32 {
 //        Materia mat = new Materia("PROGRAMACIÓN", 1, true);
 //        System.out.println(mat.toString());
 
-    }
+
+
+/*        MateriaData mat=new MateriaData();
+          for(Materia materia:mat.listarMaterias())}
+                
+              System.out.println(materia.getNombre());
+  */
+              }
 
 }
