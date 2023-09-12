@@ -58,7 +58,11 @@ public class Materia {
 
     @Override
     public String toString() {
-        return  nombre + " - " + anio ;
+        return  nombre + " -" + anio +" año" ;
+    }
+
+    public void setAnio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
