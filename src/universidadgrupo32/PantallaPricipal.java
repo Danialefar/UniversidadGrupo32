@@ -78,8 +78,18 @@ public class PantallaPricipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Administracion");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
         jMenuItem3.setText("Manejo de Inscripciones");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMenuItem4.setText("Manipulacion de Notas");
@@ -95,6 +105,11 @@ public class PantallaPricipal extends javax.swing.JFrame {
         jMenu4.setText("Consultas");
 
         jMenuItem5.setText("Alumnos por Materia");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
@@ -128,7 +143,12 @@ public class PantallaPricipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        CargaDeNotas not=new CargaDeNotas();
+        not.setVisible(true);
+        escritorio.add(not);
+        escritorio.moveToFront(not);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -139,6 +159,28 @@ public class PantallaPricipal extends javax.swing.JFrame {
         escritorio.add(mat);
         escritorio.moveToFront(mat);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionDeInscripciones ins=new GestionDeInscripciones();
+        ins.setVisible(true);
+        escritorio.add(ins);
+        escritorio.moveToFront(ins);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ConsultaAlumnoMateria cam=new ConsultaAlumnoMateria();
+        cam.setVisible(true);
+        escritorio.add(cam);
+        escritorio.moveToFront(cam);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
