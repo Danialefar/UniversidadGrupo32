@@ -33,22 +33,24 @@ public class AlumnoData {
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
-                JOptionPane.showMessageDialog(null, "ALUMNO AÑADIDO CON EXITO");
+                alumno.setIdAlumno(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "ALUMNO AÑADIDO CON EXITO - I.D. : " + alumno.getIdAlumno());
             }
             ps.close();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA ALUMNO" + ex.getMessage());
         }
     }
 
-    public Alumno buscarAlumnoPorDni(int dni) {
+    public Alumno buscarAlumno(int dni) {
+
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaDeNacimiento "
+                + "FROM alumno WHERE dni = ? AND estado = 1 ";
         Alumno alumno = null;
-        String sql = "SELEC idAlumno, dni, apellido, nombre, fechaDeNacimiento"
-                + "FROM alumno WRERE dni=? AND estado=1 ";
-        PreparedStatement ps = null;
+
         try {
-            ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
             ResultSet rs = ps.executeQuery();
 
@@ -60,10 +62,12 @@ public class AlumnoData {
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaDeNacimiento").toLocalDate());
                 alumno.setActivo(true);
+
             } else {
                 JOptionPane.showMessageDialog(null, "NO EXISTE EL ALUMNO");
             }
             ps.close();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA ALUMNO" + ex.getMessage());
         }
@@ -119,20 +123,20 @@ public class AlumnoData {
 
     }
 
-    public void bajaAlumno(int dni){
+    public void bajaAlumno(int dni) {
         try {
-            String sql= "UPDATE alumno SET estado=0 WHERE dni=?";
-            PreparedStatement ps= con.prepareStatement(sql);
+            String sql = "UPDATE alumno SET estado=0 WHERE dni=?";
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
-            int fila= ps.executeUpdate();
-            if(fila==1){
-            JOptionPane.showMessageDialog(null, "SE DIÓ DE BAJA EL ALUMNO" );
+            int fila = ps.executeUpdate();
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, "SE DIÓ DE BAJA EL ALUMNO");
             }
             ps.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA ALUMNO" + e.getMessage());
         }
-    
+
     }
-    
+
 }
