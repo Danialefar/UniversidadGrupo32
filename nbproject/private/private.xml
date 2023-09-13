@@ -2,24 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/nbproject/genfiles.properties</file>
-            <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32accesoDatos/Conexion.java</file>
-            <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32entidades/Alumno.java</file>
-            <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32accesoDatos/AlumnoData.java</file>
-            <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/nbproject/project.properties</file>
-            <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32entidades/Inscripcion.java</file>
-            <file>file:/C:/Users/Victo/Downloads/Desktop/grupo/UniversidadGrupo32/src/universidadgrupo32entidades/Materia.java</file>
-=======
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/UniversidadGrupo32/src/universidadgrupo32accesoDatos/MateriaData.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/UniversidadGrupo32/src/universidadgrupo32accesoDatos/InscripcionData.java</file>
-            <file>file:/C:/Users/vvted/OneDrive/Documentos/NetBeansProjects/UniversidadGrupo32/src/universidadgrupo32accesoDatos/AlumnoData.java</file>
->>>>>>> 4c698ecca5d10189aad3e13bddf13f618e8f7c2e
+            <file>file:/C:/Users/Emiliano/OneDrive/Documentos/GitHub/UniversidadGrupo32/src/universidadgrupo32/GestionDeInscripciones.java</file>
+            <file>file:/C:/Users/Emiliano/OneDrive/Documentos/GitHub/UniversidadGrupo32/src/universidadgrupo32/ConsultaAlumnoMateria.java</file>
+            <file>file:/C:/Users/Emiliano/OneDrive/Documentos/GitHub/UniversidadGrupo32/src/universidadgrupo32accesoDatos/AlumnoData.java</file>
+            <file>file:/C:/Users/Emiliano/OneDrive/Documentos/GitHub/UniversidadGrupo32/src/universidadgrupo32/CargaDeNotas.java</file>
+            <file>file:/C:/Users/Emiliano/OneDrive/Documentos/GitHub/UniversidadGrupo32/src/universidadgrupo32/GestionDeAlumnos.java</file>
+            <file>file:/C:/Users/Emiliano/OneDrive/Documentos/GitHub/UniversidadGrupo32/src/universidadgrupo32/PantallaPricipal.java</file>
         </group>
-=======
-        <group/>
->>>>>>> 57880a828fd84624b1ed26cb41f068b4c121ad1c
     </open-files>
 </project-private>
