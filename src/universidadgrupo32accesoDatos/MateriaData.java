@@ -70,6 +70,30 @@ public class MateriaData {
     
     }    
 
+    public void modificarMateria(Materia materia){
+    
+          String sql="UPDATE materia SET nombre= ?,anio= ?" + "WHERE idMateria = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnio());
+            ps.setInt(3, materia.getIdMateria());
+            int exito = ps.executeUpdate();
+             if(exito==1){
+             
+                 JOptionPane.showMessageDialog(null, "Materia modificada");
+             
+             }
+             
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
+        
+        }
+    }
+            
+    
+    
     public List<Materia> listarMaterias() {
     
     String sql = "SELECT nombre,anio, estado FROM materia WHERE idMateria = ? AND estado = 1";
@@ -96,29 +120,4 @@ public class MateriaData {
         return materias;
     
     }
-    
-    public void modificarMateria(Materia materia) {
-        
-        String sql="UPDATE materia SET nombre= ?, anio= ?" + "WHERE idMateria = ?";
-    
-        try {
-             PreparedStatement ps= con.prepareStatement(sql);
-             ps.setString(1, materia.getNombre());
-             ps.setInt(2, materia.getAnio());
-             ps.setBoolean(3, materia.isEstado());
-             ps.setInt(4, materia.getIdMateria());
-             int exito = ps.executeUpdate();
-             if(exito==1){
-             
-                 JOptionPane.showMessageDialog(null, "Alumno modificado");
-             
-             }
-             
-        } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
-        
-        }
-    }
-    
-}
+}    
