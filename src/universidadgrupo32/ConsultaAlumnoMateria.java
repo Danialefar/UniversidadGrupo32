@@ -5,17 +5,25 @@
  */
 package universidadgrupo32;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Emiliano
  */
 public class ConsultaAlumnoMateria extends javax.swing.JInternalFrame {
-
+private final DefaultTableModel modelo=new DefaultTableModel(){
+    @Override
+    public boolean isCellEditable(int f, int c){
+        return false;
+    }
+};
     /**
      * Creates new form ConsultaAlumnoMateria
      */
     public ConsultaAlumnoMateria() {
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -32,7 +40,7 @@ public class ConsultaAlumnoMateria extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTalumnomateria = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Listado de Alumnos por Materia");
@@ -41,7 +49,7 @@ public class ConsultaAlumnoMateria extends javax.swing.JInternalFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTalumnomateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -52,7 +60,7 @@ public class ConsultaAlumnoMateria extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTalumnomateria);
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +122,19 @@ public class ConsultaAlumnoMateria extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+private void armarCabecera(){
+    modelo.addColumn("ID");
+    modelo.addColumn("DNI");
+    modelo.addColumn("Apellido");
+    modelo.addColumn("Nombre");
+    jTalumnomateria.setModel(modelo);
+}
+private void borrarFilas(){
+    int f=jTalumnomateria.getRowCount()-1;
+    for( ;f>=0;f--   ){
+        modelo.removeRow(f);
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -123,6 +143,6 @@ public class ConsultaAlumnoMateria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTalumnomateria;
     // End of variables declaration//GEN-END:variables
 }
