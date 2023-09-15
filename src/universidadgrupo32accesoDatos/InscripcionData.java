@@ -56,7 +56,7 @@ public class InscripcionData {
         if (rs.next()) {
                 inscripcion=new Inscripcion();
                 inscripcion.setNota(rs.getInt("nota"));
-                inscripcion.setAlumno.(rs.getInt("idAlumno"));
+                inscripcion.setAlumno(rs.getInt("idAlumno"));
                 inscripcion.setMateria(rs.getInt("idMateria"));
                 inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
 

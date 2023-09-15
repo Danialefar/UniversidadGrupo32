@@ -14,11 +14,12 @@ public class UniversidadGrupo32 {
 
         Connection con = Conexion.getConexion();
 
-//        Alumno a1 = new Alumno(37555278, "ABACA", "MARTIN", LocalDate.of(1994, 10, 8), true);
+//      Alumno a1 = new Alumno(37555278, "ABACA", "MARTIN", LocalDate.of(1994, 10, 8), true);
         AlumnoData alum = new AlumnoData();
-        Alumno aluE=alum.buscarAlumno(37555278);
+        Alumno aluE=alum.buscarAlumno(48888888);
         if(aluE!=null){
-        System.out.println(aluE.getDni()+"-"+aluE.getApellido()+", "+aluE.getNombre());
+        System.out.println(aluE.getDni()+"-"+aluE.getApellido()+", "+aluE.getNombre()+" - "+aluE.isActivo());
+        
         }
 
 
