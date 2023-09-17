@@ -228,9 +228,30 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
-
+         AlumnoData aluD = new AlumnoData();
+        Alumno alu=new Alumno ();
+        int dni=Integer.parseInt(jTdocumento.getText());
+        try{
+            aluD.bajaAlumno(dni);
+            
+            jTdocumento.setText("");
+            jTapellido.setText("");
+            jTnombre.setText("");
+            jRestado.setSelected(false);
+            jDfecha.setDate(null);
+            
+            jTapellido.setEnabled(false);
+            jTnombre.setEnabled(false);
+            jRestado.setEnabled(false);
+            jDfecha.setEnabled(false);
+            jBeliminar.setEnabled(false);
+            jBguardar.setEnabled(false);
+            
+        }catch(NumberFormatException ex){
+    JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
     }//GEN-LAST:event_jBeliminarActionPerformed
-
+  }
+    
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         jBguardar.setEnabled(false);
         jBeliminar.setEnabled(true);
