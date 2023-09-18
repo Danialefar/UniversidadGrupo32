@@ -22,6 +22,12 @@ public class Alumno {
         this.activo = activo;
     }
 
+    public Alumno(String apellido, String nombre) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+    }
+    
+
     public Alumno(int IdAlumno, int dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
         this.IdAlumno = IdAlumno;
         this.dni = dni;
