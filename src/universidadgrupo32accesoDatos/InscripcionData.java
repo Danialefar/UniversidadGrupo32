@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import universidadgrupo32entidades.Alumno;
 import universidadgrupo32entidades.Inscripcion;
@@ -44,32 +46,35 @@ public class InscripcionData {
          
          
      }
-     public Inscripcion buscarInscripcion(int id) {
-    
-    String sql = "SELECT idInscripcion, nota , idAlumno, idMateroa FROM inscripcion WHERE idIscripcion = ?";
-    Inscripcion inscripcion = null;
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
+       
         
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-                inscripcion=new Inscripcion();
+         
+     public List<Inscripcion> listarInscripciones() {
+        List<Inscripcion> inscripciones = new ArrayList<>();
+        List<AlumnoData> alumnosDatas = new ArrayList<>();
+        AlumnoData alumnoData = new AlumnoData();
+        alumnosDatas = alumnoData.listarAlumnos();
+        try {
+            String sql = "SELECT inscripcion.*, alumno.*, materia.* FROM inscripcion "
+                    + "JOIN materia ON inscripcion.idMateria = materia.idMateria "
+                    + "JOIN alumno ON incripcion.idAlumno = alumnos idAlumno";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Inscripcion inscripcion = new Inscripcion();
+                
+                inscripcion.setAlumno(new Alumno());
                 inscripcion.setNota(rs.getInt("nota"));
-                inscripcion.setAlumno(rs.getInt("idAlumno"));
-                inscripcion.setMateria(rs.getInt("idMateria"));
-                inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
+                inscripcion.setMateria(new Materia());
+                inscripciones.add(inscripcion);
 
-         } else {
-              JOptionPane.showMessageDialog(null, "No existe la Inscripcion");
+            }
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" + e.getMessage());
         }
-        ps.close();
-    } catch (SQLException ex) {
-    JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion ");
-    }    
-        return inscripcion;
-    
-    }    
+        return inscripciones;
+    }
              
      
 }
