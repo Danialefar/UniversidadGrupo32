@@ -49,15 +49,15 @@ public class InscripcionData {
         List<Inscripcion> inscripciones = new ArrayList<>();
       
         
-            String sql = "SELECT inscripcion.nota, alumno.apellido, alumno.nombre AS nombrAlumno, materia.nombre AS nombreMateria, materia.año "
-                    + "FROM inscripcion "
-                    + "JOIN materia ON inscripcion.idMateria = materia.idMateria"
-                    + "JOIN alumno ON inscripcion.idAlumno = alumno.idAlumno";
-
 //            String sql = "SELECT inscripcion.nota, alumno.apellido, alumno.nombre AS nombrAlumno, materia.nombre AS nombreMateria, materia.año "
-//                    + "FROM inscripcion, materia, alumno "
-//                    + "WHERE inscripcion.idMateria = materia.idMateria "
-//                    + "AND inscripcion.idAlumno = alumno.idAlumno";
+//                    + "FROM inscripcion "
+//                    + "JOIN materia ON inscripcion.idMateria = materia.idMateria"
+//                    + "JOIN alumno ON inscripcion.idAlumno = alumno.idAlumno";
+
+            String sql = "SELECT inscripcion.nota, alumno.apellido, alumno.nombre AS nombrAlumno, materia.nombre AS nombreMateria, materia.año "
+                    + "FROM inscripcion, materia, alumno "
+                    + "WHERE inscripcion.idMateria = materia.idMateria "
+                    + "AND inscripcion.idAlumno = alumno.idAlumno";
             try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
