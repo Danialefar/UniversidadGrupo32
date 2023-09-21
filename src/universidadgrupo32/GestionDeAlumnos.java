@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 import java.time.ZoneId;
 import java.sql.*;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import universidadgrupo32accesoDatos.AlumnoData;
 import universidadgrupo32entidades.Alumno;
@@ -200,58 +201,76 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBsalirActionPerformed
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
-        try{
-        int dni = Integer.parseInt(jTdocumento.getText());
-        
-        LocalDate fechNac = jDfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        boolean est = false;
-        if (jRestado.isSelected()) {
-            est = true;
-        }
-        Alumno alu = new Alumno(dni, jTapellido.getText(), jTnombre.getText(), fechNac, est);
-        AlumnoData aluD = new AlumnoData();
-        aluD.guardarAlumno(alu);
+        try {
+            int dni = Integer.parseInt(jTdocumento.getText());
 
-        jTdocumento.setText("");
-        jTapellido.setText("");
-        jTnombre.setText("");
-        jRestado.setSelected(false);
+            LocalDate fechNac = jDfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            boolean est = false;
+            if (jRestado.isSelected()) {
+                est = true;
+            }
+            Alumno alu = new Alumno(dni, jTapellido.getText(), jTnombre.getText(), fechNac, est);
+            AlumnoData aluD = new AlumnoData();
+            aluD.guardarAlumno(alu);
 
-        jTapellido.setEnabled(false);
-        jTnombre.setEnabled(false);
-        jRestado.setEnabled(false);
-        jDfecha.setEnabled(false);
-        }catch(NumberFormatException ex){
-    JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
-    jTdocumento.setText("");
-    }
-    }//GEN-LAST:event_jBguardarActionPerformed
-
-    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
-         AlumnoData aluD = new AlumnoData();
-        Alumno alu=new Alumno ();
-        int dni=Integer.parseInt(jTdocumento.getText());
-        try{
-            aluD.bajaAlumno(dni);
-            
             jTdocumento.setText("");
             jTapellido.setText("");
             jTnombre.setText("");
             jRestado.setSelected(false);
-            jDfecha.setDate(null);
-            
+
             jTapellido.setEnabled(false);
             jTnombre.setEnabled(false);
             jRestado.setEnabled(false);
             jDfecha.setEnabled(false);
-            jBeliminar.setEnabled(false);
-            jBguardar.setEnabled(false);
-            
-        }catch(NumberFormatException ex){
-    JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
+            jTdocumento.setText("");
+        }
+    }//GEN-LAST:event_jBguardarActionPerformed
+
+    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
+        
+        if (jRestado.isSelected()==false){
+            JOptionPane.showMessageDialog(this, "EL ALUMNO YA ESTA DADO DE BAJA");
+            jTdocumento.setText("");
+                jTapellido.setText("");
+                jTnombre.setText("");
+                jRestado.setSelected(false);
+                jDfecha.setDate(null);
+
+                jTapellido.setEnabled(false);
+                jTnombre.setEnabled(false);
+                jRestado.setEnabled(false);
+                jDfecha.setEnabled(false);
+                jBeliminar.setEnabled(false);
+                jBguardar.setEnabled(false);
+        } else {
+
+            AlumnoData aluD = new AlumnoData();
+            Alumno alu = new Alumno();
+            int dni = Integer.parseInt(jTdocumento.getText());
+            try {
+                aluD.bajaAlumno(dni);
+
+                jTdocumento.setText("");
+                jTapellido.setText("");
+                jTnombre.setText("");
+                jRestado.setSelected(false);
+                jDfecha.setDate(null);
+
+                jTapellido.setEnabled(false);
+                jTnombre.setEnabled(false);
+                jRestado.setEnabled(false);
+                jDfecha.setEnabled(false);
+                jBeliminar.setEnabled(false);
+                jBguardar.setEnabled(false);
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
     }//GEN-LAST:event_jBeliminarActionPerformed
-  }
-    
+        }
+    }
+
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         jBguardar.setEnabled(false);
         jBeliminar.setEnabled(true);
@@ -259,33 +278,37 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jTnombre.setEnabled(true);
         jRestado.setEnabled(true);
         jDfecha.setEnabled(true);
-        
+
         AlumnoData aluD = new AlumnoData();
-        Alumno alu=new Alumno ();
-        try{
-        int dni=Integer.parseInt(jTdocumento.getText());
-        if(alu!=null){
-        alu=aluD.buscarAlumno(dni);
-        jTapellido.setText(alu.getApellido());
-        jTnombre.setText(alu.getNombre());
-        jDfecha.setDate(java.sql.Date.valueOf(alu.getFechaNac()));
-        if(alu.isActivo()){
-        jRestado.setSelected(true);
-        }else{jRestado.setSelected(false);}
-        }else {JOptionPane.showMessageDialog(this, "NO EXISTE EL ALUMNO CON ESE DNI");}
-        
-        }catch(NumberFormatException ex){
-    JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
-    }
+        Alumno alu = new Alumno();
+        try {
+            int dni = Integer.parseInt(jTdocumento.getText());
+            if (alu != null) {
+                alu = aluD.buscarAlumno(dni);
+                jTapellido.setText(alu.getApellido());
+                jTnombre.setText(alu.getNombre());
+                jDfecha.setDate(java.sql.Date.valueOf(alu.getFechaNac()));
+                if (alu.isActivo()) {
+                    jRestado.setSelected(true);
+                } else {
+                    jRestado.setSelected(false);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NO EXISTE EL ALUMNO CON ESE DNI");
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
+        }
     }//GEN-LAST:event_jBbuscarActionPerformed
 
-public void limpiarGalu(){
+    public void limpiarGalu() {
         jTdocumento.setText("");
         jTapellido.setText("");
         jTnombre.setText("");
         jRestado.setSelected(false);
         jDfecha.setDate(null);
-}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
     private javax.swing.JButton jBeliminar;
@@ -306,4 +329,3 @@ public void limpiarGalu(){
     private javax.swing.JTextField jTnombre;
     // End of variables declaration//GEN-END:variables
 }
-

@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidadgrupo32;
 
-/**
- *
- * @author Emiliano
- */
+import javax.swing.JOptionPane;
+import universidadgrupo32accesoDatos.MateriaData;
+import universidadgrupo32entidades.Materia;
+
 public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GestionDeMaterias
-     */
     public GestionDeMaterias() {
         initComponents();
+        jBguardarMat.setEnabled(false);
+        jBeliminarMat.setEnabled(false);
+        jTnombreMat.setEnabled(false);
+        jTaño.setEnabled(false);
+        jRestadoMat.setEnabled(false);
     }
 
     /**
@@ -33,15 +30,15 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jBnuevoMat = new javax.swing.JButton();
+        jBeliminarMat = new javax.swing.JButton();
+        jBguardarMat = new javax.swing.JButton();
+        jBsalir = new javax.swing.JButton();
+        jBbuscarMat = new javax.swing.JButton();
+        jTidMateria = new javax.swing.JTextField();
+        jTnombreMat = new javax.swing.JTextField();
+        jTaño = new javax.swing.JTextField();
+        jRestadoMat = new javax.swing.JRadioButton();
 
         setTitle("Materias");
 
@@ -55,29 +52,39 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado");
 
-        jButton1.setText("Nuevo");
-
-        jButton2.setText("Eliminar");
-
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jBnuevoMat.setText("Nuevo");
+        jBnuevoMat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBnuevoMatActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Salir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBeliminarMat.setText("Eliminar");
+
+        jBguardarMat.setText("Guardar");
+        jBguardarMat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBguardarMatActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Buscar");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jBsalir.setText("Salir");
+        jBsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jBsalirActionPerformed(evt);
+            }
+        });
+
+        jBbuscarMat.setText("Buscar");
+        jBbuscarMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarMatActionPerformed(evt);
+            }
+        });
+
+        jTidMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTidMateriaActionPerformed(evt);
             }
         });
 
@@ -101,15 +108,15 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTidMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton5))
+                                        .addComponent(jBbuscarMat))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jTnombreMat, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTaño, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(74, 74, 74))
                             .addGroup(layout.createSequentialGroup()
@@ -118,17 +125,17 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton1)))
+                                        .addComponent(jRestadoMat)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(jBnuevoMat)
                         .addGap(13, 13, 13)
-                        .addComponent(jButton2)
+                        .addComponent(jBeliminarMat)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(jBguardarMat)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                        .addComponent(jBsalir)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -141,60 +148,131 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBbuscarMat)
+                    .addComponent(jTidMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTnombreMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jRestadoMat))
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jBnuevoMat)
+                    .addComponent(jBeliminarMat)
+                    .addComponent(jBguardarMat)
+                    .addComponent(jBsalir))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jBguardarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarMatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        try {
+            int anio = Integer.parseInt(jTaño.getText());
+            Materia materia = new Materia(jTnombreMat.getText(), anio, true);
+            MateriaData md = new MateriaData();
+            if (!"".equals(jTnombreMat.getText())) {
+                if (md.buscarMateriaNombreAno(jTnombreMat.getText(), anio) == false) {
+                    md.guardarMateria(materia);
+                    jTnombreMat.setText("");
+                    jTaño.setText("");
+                    jBguardarMat.setEnabled(false);
+                    jBeliminarMat.setEnabled(false);
+                    jTnombreMat.setEnabled(false);
+                    jTaño.setEnabled(false);
+                    jRestadoMat.setEnabled(false);
+                    jTidMateria.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "LA MATERIA YA SE ENCUENTRA INGRESADA");
+                    jTnombreMat.setText("");
+                    jTaño.setText("");
+                    jBguardarMat.setEnabled(false);
+                    jBeliminarMat.setEnabled(false);
+                    jTnombreMat.setEnabled(false);
+                    jTaño.setEnabled(false);
+                    jRestadoMat.setEnabled(false);
+                    jTidMateria.setEnabled(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "NOMBRE DE MATERIA VACIO");
+                jTnombreMat.setText("");
+                jTaño.setText("");
+            }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-            this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "EL AÑO INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
+            jTaño.setText("");
+        }
+    }//GEN-LAST:event_jBguardarMatActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBsalirActionPerformed
+
+    private void jTidMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTidMateriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTidMateriaActionPerformed
 
+    private void jBnuevoMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnuevoMatActionPerformed
+        // TODO add your handling code here:
+        jBguardarMat.setEnabled(true);
+        jBeliminarMat.setEnabled(false);
+        jTnombreMat.setEnabled(true);
+        jTaño.setEnabled(true);
+        jRestadoMat.setEnabled(false);
+        jTidMateria.setEnabled(false);
+
+
+    }//GEN-LAST:event_jBnuevoMatActionPerformed
+
+    private void jBbuscarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarMatActionPerformed
+        // TODO add your handling code here:
+        Materia materia = new Materia();
+        MateriaData md = new MateriaData();
+        try{
+        md.buscarMateriaID(Integer.parseInt(jTidMateria.getText()));
+        
+        if(md!=null){
+        jTnombreMat.setText(materia.getNombre());
+        jTaño.setText(materia.getAnio()+"");
+        if (materia.isEstado()) {
+                    jRestadoMat.setSelected(true);
+                } else {
+                    jRestadoMat.setSelected(false);
+                }
+        }else{
+            JOptionPane.showMessageDialog(this, "NO EXISTE LA MATERIA");
+        }
+        }catch(NumberFormatException nf){
+        JOptionPane.showMessageDialog(this, "CODIGO NO ES UN NÚMERO VALIDO");
+        }
+    }//GEN-LAST:event_jBbuscarMatActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jBbuscarMat;
+    private javax.swing.JButton jBeliminarMat;
+    private javax.swing.JButton jBguardarMat;
+    private javax.swing.JButton jBnuevoMat;
+    private javax.swing.JButton jBsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRestadoMat;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTaño;
+    private javax.swing.JTextField jTidMateria;
+    private javax.swing.JTextField jTnombreMat;
     // End of variables declaration//GEN-END:variables
 }
