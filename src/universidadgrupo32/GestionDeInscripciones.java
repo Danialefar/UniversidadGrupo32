@@ -39,6 +39,8 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
        armarCabecera1();
        jRinscripto.setSelected(true);
        jRnoInscripto.setSelected(false); 
+       jBinscribir.setEnabled(false);
+       jBanular.setEnabled(false);
     }
 
     /**
@@ -59,8 +61,8 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         jRnoInscripto = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTinscripcion = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBinscribir = new javax.swing.JButton();
+        jBanular = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setTitle("Formulario de Inscripcion");
@@ -103,14 +105,14 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         jTinscripcion.setToolTipText("");
         jScrollPane1.setViewportView(jTinscripcion);
 
-        jButton1.setText("Inscribir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBinscribir.setText("Inscribir");
+        jBinscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBinscribirActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Anular Inscripcion");
+        jBanular.setText("Anular Inscripcion");
 
         jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -125,9 +127,9 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(jBinscribir)
                 .addGap(43, 43, 43)
-                .addComponent(jButton2)
+                .addComponent(jBanular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(25, 25, 25))
@@ -179,8 +181,8 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(jBinscribir)
+                    .addComponent(jBanular)
                     .addComponent(jButton3))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -192,9 +194,9 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRinscriptoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinscribirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBinscribirActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
@@ -214,7 +216,18 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
                     insc.getMateria().getAnio(),
                     insc.getNota(),});
           }
-          }
+            jBinscribir.setEnabled(false);
+            jBanular.setEnabled(true);
+          }else if(jRinscripto.isSelected()==false && jRnoInscripto.isSelected()==true){
+              
+              
+              jBinscribir.setEnabled(true);
+              jBanular.setEnabled(false);
+                }else if(jRinscripto.isSelected()==true && jRnoInscripto.isSelected()==true){
+                    JOptionPane.showMessageDialog(this, "Elija solo una de las opciones(inscripto - no inscripto)");
+                    jBinscribir.setEnabled(false);
+                    jBanular.setEnabled(false);
+                }
         
     }//GEN-LAST:event_jCseleccionAluActionPerformed
 
@@ -233,8 +246,8 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBanular;
+    private javax.swing.JButton jBinscribir;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jCseleccionAlu;
     private javax.swing.JLabel jLabel1;
