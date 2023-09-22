@@ -115,6 +115,21 @@ public class MateriaData {
         }
     }
 
+    public void bajaMateria(int id) {
+        try {
+            String sql = "UPDATE materia SET estado=0 WHERE idMateria=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, "SE DIÓ DE BAJA LA MATERIA");
+            }
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA MATERIA" + e.getMessage());
+        }
+    }
+    
     public List<Materia> listarMaterias() {
 
         String sql = "SELECT nombre,anio, estado FROM materia WHERE idMateria = ? AND estado = 1";

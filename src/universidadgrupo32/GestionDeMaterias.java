@@ -5,7 +5,7 @@ import universidadgrupo32accesoDatos.MateriaData;
 import universidadgrupo32entidades.Materia;
 
 public class GestionDeMaterias extends javax.swing.JInternalFrame {
-
+    
     public GestionDeMaterias() {
         initComponents();
         jBguardarMat.setEnabled(false);
@@ -60,6 +60,11 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jBeliminarMat.setText("Eliminar");
+        jBeliminarMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBeliminarMatActionPerformed(evt);
+            }
+        });
 
         jBguardarMat.setText("Guardar");
         jBguardarMat.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +212,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 jTnombreMat.setText("");
                 jTaño.setText("");
             }
-
+            
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "EL AÑO INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
             jTaño.setText("");
@@ -230,7 +235,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jTaño.setEnabled(true);
         jRestadoMat.setEnabled(false);
         jTidMateria.setEnabled(false);
-
+        
 
     }//GEN-LAST:event_jBnuevoMatActionPerformed
 
@@ -240,7 +245,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         MateriaData md = new MateriaData();
         try {
             int id = Integer.parseInt(jTidMateria.getText());
-
+            
             if (md != null) {
                 materia = md.buscarMateriaID(id);
                 jTnombreMat.setEnabled(true);
@@ -263,6 +268,23 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "CODIGO NO ES UN NÚMERO VALIDO");
         }
     }//GEN-LAST:event_jBbuscarMatActionPerformed
+
+    private void jBeliminarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarMatActionPerformed
+        // TODO add your handling code here:
+        Materia materia = new Materia();
+        MateriaData md = new MateriaData();
+        int id = Integer.parseInt(jTidMateria.getText());
+        md.bajaMateria(id);
+        jTidMateria.setText("");
+        jTnombreMat.setText("");
+        jTaño.setText("");
+        jBnuevoMat.setEnabled(true);
+        jBguardarMat.setEnabled(false);
+        jBeliminarMat.setEnabled(false);
+        jTnombreMat.setEnabled(false);
+        jTaño.setEnabled(false);
+        jRestadoMat.setEnabled(false);
+    }//GEN-LAST:event_jBeliminarMatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
