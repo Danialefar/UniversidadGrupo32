@@ -90,7 +90,6 @@ public class AlumnoData {
                 alumno.setFechaNac(rs.getDate("fechaDeNacimiento").toLocalDate());
                 alumno.setActivo(rs.getBoolean("estado"));
                 alumnos.add(alumno);
-
             }
             ps.close();
         } catch (Exception e) {

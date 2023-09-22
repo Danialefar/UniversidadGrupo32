@@ -6,6 +6,8 @@
 package universidadgrupo32;
 
 import javax.swing.table.DefaultTableModel;
+import universidadgrupo32accesoDatos.AlumnoData;
+import universidadgrupo32entidades.Alumno;
 
 /**
  *
@@ -24,6 +26,12 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
     public CargaDeNotas() {
         initComponents();
         armarCabecera();
+            Alumno alu = new Alumno();
+           AlumnoData aluD = new AlumnoData();
+           //aca si serviria listar solo los activos
+           for(Alumno alus:aluD.listarAlumnos()){
+              jCseleccionAluNotas.addItem(alus.getDni()+", "+alus.getApellido()+", "+alus.getNombre());
+          }
     }
 
     /**
@@ -38,7 +46,7 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCseleccionAluNotas = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTnotas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -50,7 +58,7 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
 
         jLabel2.setText("Seleccione Alumno:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCseleccionAluNotas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar" }));
 
         jTnotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,7 +104,7 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
                         .addGap(32, 32, 32)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCseleccionAluNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,7 +121,7 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCseleccionAluNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
@@ -145,7 +153,7 @@ private void borrarFilas(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCseleccionAluNotas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
