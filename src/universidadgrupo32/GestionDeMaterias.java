@@ -238,25 +238,32 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Materia materia = new Materia();
         MateriaData md = new MateriaData();
-        try{
-        md.buscarMateriaID(Integer.parseInt(jTidMateria.getText()));
-        
-        if(md!=null){
-        jTnombreMat.setText(materia.getNombre());
-        jTaño.setText(materia.getAnio()+"");
-        if (materia.isEstado()) {
+        try {
+            int id = Integer.parseInt(jTidMateria.getText());
+
+            if (md != null) {
+                materia = md.buscarMateriaID(id);
+                jTnombreMat.setEnabled(true);
+                jTaño.setEnabled(true);
+                jRestadoMat.setEnabled(true);
+                jBnuevoMat.setEnabled(false);
+                jBguardarMat.setEnabled(false);
+                jBeliminarMat.setEnabled(true);
+                jTnombreMat.setText(materia.getNombre());
+                jTaño.setText(materia.getAnio() + "");
+                if (materia.isEstado()) {
                     jRestadoMat.setSelected(true);
                 } else {
                     jRestadoMat.setSelected(false);
                 }
-        }else{
-            JOptionPane.showMessageDialog(this, "NO EXISTE LA MATERIA");
-        }
-        }catch(NumberFormatException nf){
-        JOptionPane.showMessageDialog(this, "CODIGO NO ES UN NÚMERO VALIDO");
+            } else {
+                JOptionPane.showMessageDialog(this, "NO EXISTE LA MATERIA");
+            }
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "CODIGO NO ES UN NÚMERO VALIDO");
         }
     }//GEN-LAST:event_jBbuscarMatActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscarMat;

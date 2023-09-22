@@ -45,14 +45,14 @@ public class MateriaData {
     }
 
     public Materia buscarMateriaID(int id) {
-
-        String sql = "SELECT nombre,año,estado FROM materia WHERE idMateria = ?";
         Materia materia = null;
+        String sql = "SELECT  nombre, año, estado FROM materia WHERE IdMateria = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 materia = new Materia();
                 materia.setIdMateria(id);
@@ -84,18 +84,14 @@ public class MateriaData {
             if (rs.next()) {
                 ps.close();
                 return true;
-                
+
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia ");
-        }    
+        }
         return false;
     }
-
-      
-
-    
 
     public void modificarMateria(Materia materia) {
 
