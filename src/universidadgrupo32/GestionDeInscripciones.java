@@ -5,12 +5,15 @@
  */
 package universidadgrupo32;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo32accesoDatos.AlumnoData;
 import universidadgrupo32accesoDatos.InscripcionData;
 import universidadgrupo32entidades.Alumno;
 import universidadgrupo32entidades.Inscripcion;
+import universidadgrupo32entidades.Materia;
 
 /**
  *
@@ -34,7 +37,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
            AlumnoData aluD = new AlumnoData();
            //Hay que modificar listar alumnos, solo lista los actvios.
            for(Alumno alus:aluD.listarAlumnos()){
-              jCseleccionAlu.addItem(alus.getDni()+", "+alus.getApellido()+", "+alus.getNombre());
+              jCseleccionAlu.addItem(alus.getDni()+" - "+alus.getApellido()+", "+alus.getNombre());
           }
        armarCabecera1();
        jRinscripto.setSelected(true);
@@ -52,6 +55,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -68,7 +72,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         setTitle("Formulario de Inscripcion");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("Consulta de Inscripcion");
+        jLabel1.setText("Inscripcion");
 
         jLabel2.setText("Seleccione un Alumno");
 
@@ -82,6 +86,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Listado de Materias");
 
+        buttonGroup1.add(jRinscripto);
         jRinscripto.setText("Materias Inscriptas");
         jRinscripto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +94,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jRnoInscripto);
         jRnoInscripto.setText("Materias no Inscriptas");
 
         jTinscripcion.setModel(new javax.swing.table.DefaultTableModel(
@@ -153,12 +159,13 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRnoInscripto))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(126, 126, 126)
                         .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(119, 119, 119))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,28 +214,17 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         Inscripcion ins =new Inscripcion();
         InscripcionData insD=new InscripcionData();
         
-        if (jRinscripto.isSelected()==true && jRnoInscripto.isSelected()==false){
+        Alumno aSelec= (Alumno) jCseleccionAlu.getSelectedItem();
+        System.out.println(aSelec.getIdAlumno());
+        List<Materia> lista = insD.listarNOInscripciones(aSelec.getIdAlumno());
           
-          for(Inscripcion insc:insD.listarInscripciones()){
+        for(Materia m:lista){
            
                     modelo.addRow(new Object[]{
-                    insc.getMateria().getNombre(),
-                    insc.getMateria().getAnio(),
-                    insc.getNota(),});
+                    m.getNombre(),
+                    m.getAnio(),});
           }
-            jBinscribir.setEnabled(false);
-            jBanular.setEnabled(true);
-          }else if(jRinscripto.isSelected()==false && jRnoInscripto.isSelected()==true){
-              
-              
-              jBinscribir.setEnabled(true);
-              jBanular.setEnabled(false);
-                }else if(jRinscripto.isSelected()==true && jRnoInscripto.isSelected()==true){
-                    JOptionPane.showMessageDialog(this, "Elija solo una de las opciones(inscripto - no inscripto)");
-                    jBinscribir.setEnabled(false);
-                    jBanular.setEnabled(false);
-                }
-        
+     
     }//GEN-LAST:event_jCseleccionAluActionPerformed
 
     private void armarCabecera1() {
@@ -246,6 +242,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBanular;
     private javax.swing.JButton jBinscribir;
     private javax.swing.JButton jButton3;

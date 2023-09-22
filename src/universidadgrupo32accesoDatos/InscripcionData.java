@@ -76,4 +76,31 @@ public class InscripcionData {
         return inscripciones;
     }
 
+    public List<Materia> listarNOInscripciones(int id) {
+        ArrayList<Materia> materias = new ArrayList<>();
+
+        String sql = "SELECT * FROM materia"
+                + "WHERE estado = 1 AND idMateria "
+                + "NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno= ?)";
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia materia = new Materia();
+
+                materia.setNombre(rs.getString ("nombre"));
+                materia.setAnio(rs.getInt("año"));
+
+                materias.add(materia);
+
+            }
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" + e.getMessage());
+        }
+        return materias;
+    }
+    
 }
