@@ -245,9 +245,9 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         MateriaData md = new MateriaData();
         try {
             int id = Integer.parseInt(jTidMateria.getText());
-            
-            if (md != null) {
-                materia = md.buscarMateriaID(id);
+            materia = md.buscarMateriaID(id);
+            if (materia != null) {
+                
                 jTnombreMat.setEnabled(true);
                 jTaño.setEnabled(true);
                 jRestadoMat.setEnabled(true);
@@ -261,9 +261,10 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 } else {
                     jRestadoMat.setSelected(false);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "NO EXISTE LA MATERIA");
-            }
+            }else {
+                jTidMateria.setText("");
+              
+            } 
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "CODIGO NO ES UN NÚMERO VALIDO");
         }

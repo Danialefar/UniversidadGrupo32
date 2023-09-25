@@ -283,8 +283,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         Alumno alu = new Alumno();
         try {
             int dni = Integer.parseInt(jTdocumento.getText());
+            alu = aluD.buscarAlumno(dni);
             if (alu != null) {
-                alu = aluD.buscarAlumno(dni);
+                
                 jTapellido.setText(alu.getApellido());
                 jTnombre.setText(alu.getNombre());
                 jDfecha.setDate(java.sql.Date.valueOf(alu.getFechaNac()));
@@ -293,9 +294,18 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 } else {
                     jRestado.setSelected(false);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "NO EXISTE EL ALUMNO CON ESE DNI");
-            }
+            }else{
+                                jBguardar.setEnabled(false);
+                                jBeliminar.setEnabled(false);
+                                jTapellido.setEnabled(false);
+                                jTnombre.setEnabled(false);
+                                jRestado.setEnabled(false);
+                                jDfecha.setEnabled(false);
+                                
+              
+             
+          } 
+            
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");

@@ -33,15 +33,14 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
      */
     public GestionDeInscripciones() {
        initComponents();
-           Alumno alu = new Alumno();
+          
            AlumnoData aluD = new AlumnoData();
-           //Hay que modificar listar alumnos, solo lista los actvios.
+          
            for(Alumno alus:aluD.listarAlumnos()){
-              jCseleccionAlu.addItem(alus.getDni()+" - "+alus.getApellido()+", "+alus.getNombre());
+              Alumno alu=new Alumno(alus.getIdAlumno(),alus.getApellido(),alus.getNombre());
+              jCseleccionAlu.addItem(alu);
           }
        armarCabecera1();
-       jRinscripto.setSelected(true);
-       jRnoInscripto.setSelected(false); 
        jBinscribir.setEnabled(false);
        jBanular.setEnabled(false);
     }
@@ -76,7 +75,6 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un Alumno");
 
-        jCseleccionAlu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
         jCseleccionAlu.setToolTipText("");
         jCseleccionAlu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +94,11 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(jRnoInscripto);
         jRnoInscripto.setText("Materias no Inscriptas");
+        jRnoInscripto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRnoInscriptoActionPerformed(evt);
+            }
+        });
 
         jTinscripcion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,7 +201,22 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRinscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRinscriptoActionPerformed
-        // TODO add your handling code here:
+        borrarFilas();
+        
+        Alumno alu=(Alumno) jCseleccionAlu.getSelectedItem();
+                          
+        InscripcionData insD=new InscripcionData();
+              
+        for(Materia mt:insD.obtenerMateriasCursadas(alu.getIdAlumno())){
+           
+                    modelo.addRow(new Object[]{
+                    mt.getIdMateria(),
+                    mt.getNombre(),
+                    mt.getAnio(),});
+          }
+         jBanular.setEnabled(true);
+      jBinscribir.setEnabled(false);
+    
     }//GEN-LAST:event_jRinscriptoActionPerformed
 
     private void jBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinscribirActionPerformed
@@ -210,27 +228,33 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jCseleccionAluActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCseleccionAluActionPerformed
-        borrarFilas();
-        Inscripcion ins =new Inscripcion();
-        InscripcionData insD=new InscripcionData();
-        
-        Alumno aSelec= (Alumno) jCseleccionAlu.getSelectedItem();
-        System.out.println(aSelec.getIdAlumno());
-        List<Materia> lista = insD.listarNOInscripciones(aSelec.getIdAlumno());
-          
-        for(Materia m:lista){
-           
-                    modelo.addRow(new Object[]{
-                    m.getNombre(),
-                    m.getAnio(),});
-          }
-     
+    
     }//GEN-LAST:event_jCseleccionAluActionPerformed
 
+    private void jRnoInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRnoInscriptoActionPerformed
+       borrarFilas();
+      jBanular.setEnabled(false);
+      jBinscribir.setEnabled(true);
+      
+        Alumno alu=(Alumno) jCseleccionAlu.getSelectedItem();
+                          
+        InscripcionData insD=new InscripcionData();
+              
+        for(Materia mt:insD.obtenerMateriasNoCursadas(alu.getIdAlumno())){
+           
+                    modelo.addRow(new Object[]{
+                    mt.getIdMateria(),
+                    mt.getNombre(),
+                    mt.getAnio(),});
+          }
+         jBanular.setEnabled(false);
+      jBinscribir.setEnabled(true);
+    }//GEN-LAST:event_jRnoInscriptoActionPerformed
+
     private void armarCabecera1() {
-        modelo.addColumn("Materia");
+        modelo.addColumn("IdMateria");
+        modelo.addColumn("Nombre");
         modelo.addColumn("Año");
-        modelo.addColumn("Última nota");
         jTinscripcion.setModel(modelo);
     }
 
@@ -246,7 +270,7 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBanular;
     private javax.swing.JButton jBinscribir;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jCseleccionAlu;
+    private javax.swing.JComboBox<Alumno> jCseleccionAlu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

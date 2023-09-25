@@ -13,7 +13,13 @@ public class Alumno {
 
     public Alumno() {
     }
-
+   
+     public Alumno(int IdAlumno,String apellido,String nombre){
+        this.IdAlumno = IdAlumno;
+        this.apellido= apellido;
+        this.nombre=nombre;
+  }
+     
     public Alumno(int dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
         this.dni = dni;
         this.apellido = apellido;
