@@ -37,7 +37,8 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
            AlumnoData aluD = new AlumnoData();
           
            for(Alumno alus:aluD.listarAlumnos()){
-              Alumno alu=new Alumno(alus.getIdAlumno(),alus.getApellido(),alus.getNombre());
+              Alumno alu=new Alumno(alus.getIdAlumno(),alus.getDni(),alus.getApellido(), alus.getNombre(),
+              alus.getFechaNac(),alus.isActivo());
               jCseleccionAlu.addItem(alu);
           }
        armarCabecera1();
@@ -76,6 +77,11 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccione un Alumno");
 
         jCseleccionAlu.setToolTipText("");
+        jCseleccionAlu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCseleccionAluMouseClicked(evt);
+            }
+        });
         jCseleccionAlu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCseleccionAluActionPerformed(evt);
@@ -122,6 +128,11 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
         });
 
         jBanular.setText("Anular Inscripcion");
+        jBanular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBanularActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +231,27 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRinscriptoActionPerformed
 
     private void jBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinscribirActionPerformed
-        // TODO add your handling code here:
+        // Inscribe al alumno en una materia
+        InscripcionData insD=new InscripcionData();
+        int filaSelec = jTinscripcion.getSelectedRow();
+        
+        if(filaSelec!=-1){
+        Alumno alumno=(Alumno) jCseleccionAlu.getSelectedItem();
+        
+        int idMateria= (Integer)modelo.getValueAt(filaSelec, 0);
+        String nombreMat= (String) modelo.getValueAt(filaSelec, 1);
+        int anio= (Integer)modelo.getValueAt(filaSelec, 2);
+        
+        Materia m=new Materia(idMateria,nombreMat,anio,true);
+        
+        Inscripcion i=new Inscripcion(m,alumno,0);
+        insD.guardarInscripcion(i);
+        borrarFilas();
+        
+                
+        
+        }else{ JOptionPane.showMessageDialog(this, "SELECCIONE UNA MATERIA DEL LISTADO");}
+        
     }//GEN-LAST:event_jBinscribirActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -250,6 +281,36 @@ public class GestionDeInscripciones extends javax.swing.JInternalFrame {
          jBanular.setEnabled(false);
       jBinscribir.setEnabled(true);
     }//GEN-LAST:event_jRnoInscriptoActionPerformed
+
+    private void jBanularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBanularActionPerformed
+        // ANULA LA INSCRICION DE UN ALUMNO A UNA MATERIA
+        InscripcionData insD=new InscripcionData();
+        int filaSelec = jTinscripcion.getSelectedRow();
+        
+        if(filaSelec!=-1){
+        Alumno alumno=(Alumno) jCseleccionAlu.getSelectedItem();
+        
+        int idMateria= (Integer)modelo.getValueAt(filaSelec, 0);
+        String nombreMat= (String) modelo.getValueAt(filaSelec, 1);
+        int anio= (Integer)modelo.getValueAt(filaSelec, 2);
+        
+        Materia m=new Materia(idMateria,nombreMat,anio,true);
+        
+        Inscripcion i=new Inscripcion(m,alumno,0);
+        insD.borrarInscripcionMateriaAlumno(alumno.getIdAlumno(), m.getIdMateria());
+        borrarFilas();
+        
+                
+        
+        }else{ JOptionPane.showMessageDialog(this, "SELECCIONE UNA MATERIA DEL LISTADO");}
+        
+          
+    }//GEN-LAST:event_jBanularActionPerformed
+
+    private void jCseleccionAluMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCseleccionAluMouseClicked
+        // TODO add your handling code here:
+        borrarFilas();
+    }//GEN-LAST:event_jCseleccionAluMouseClicked
 
     private void armarCabecera1() {
         modelo.addColumn("IdMateria");

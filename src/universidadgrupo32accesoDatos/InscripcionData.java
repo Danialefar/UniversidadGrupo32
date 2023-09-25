@@ -203,14 +203,17 @@ public class InscripcionData {
     
      public List<Alumno> obtenerAlumnoXMateria(int idMateria){
        ArrayList<Alumno> alumnosMaterias = new ArrayList<>();
-       String sql="SELECT alumno.idAlumno,alumno.dni,alumno.nombre,alumno.apellido,alumno.fechadenacimiento,alumno.estado FROM inscripcion ,alumno  WHERE inscripcion.idAlumno=alumno.idAlumno AND (idMateria=? AND alumno.estado=1)";
+       String sql="SELECT alumno.idAlumno,alumno.dni,alumno.nombre,alumno.apellido,alumno.fechadenacimiento,alumno.estado "
+               + "FROM inscripcion ,alumno  "
+               + "WHERE inscripcion.idAlumno=alumno.idAlumno AND (idMateria=? AND alumno.estado=1)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
              ps.setInt(1, idMateria);
              ResultSet rs = ps.executeQuery();
              while (rs.next()) {
                  Alumno alu=new Alumno();
-                 alu.setIdAlumno(rs.getInt("idalumno"));
+                 alu.setIdAlumno(rs.getInt("idAlumno"));
+                 alu.setDni(rs.getInt("dni"));
                  alu.setApellido(rs.getString("apellido"));
                  alu.setNombre(rs.getString("nombre"));
                  alu.setFechaNac(rs.getDate("fechadenacimiento").toLocalDate());
