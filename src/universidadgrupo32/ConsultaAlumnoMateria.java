@@ -7,6 +7,7 @@ package universidadgrupo32;
 
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo32accesoDatos.AlumnoData;
+import universidadgrupo32accesoDatos.InscripcionData;
 import universidadgrupo32accesoDatos.MateriaData;
 import universidadgrupo32entidades.Alumno;
 import universidadgrupo32entidades.Materia;
@@ -27,14 +28,15 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
      */
     public ConsultaAlumnoMateria() {
         initComponents();
+        armarCabecera();
         
-        Materia mat = new Materia();
         MateriaData matd = new MateriaData();
            
         for(Materia mats : matd.listarMaterias()){
-           jCseleccionMat.addItem(mats.getNombre()+","+mats.getAnio());
+            Materia mat=new Materia(mats.getIdMateria(),mats.getNombre(),mats.getAnio());
+           jCseleccionMat.addItem(mat);
         }
-        armarCabecera();
+       
     }
 
     /**
@@ -58,7 +60,11 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
 
         jLabel2.setText("Selecciones una Materia:");
 
-        jCseleccionMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar" }));
+        jCseleccionMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCseleccionMatActionPerformed(evt);
+            }
+        });
 
         jTalumnomateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,6 +139,22 @@ private final DefaultTableModel modelo=new DefaultTableModel(){
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCseleccionMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCseleccionMatActionPerformed
+         borrarFilas();
+        Materia mat=(Materia) jCseleccionMat.getSelectedItem();
+                          
+        InscripcionData insD=new InscripcionData();
+              
+        for(Alumno al:insD.obtenerAlumnoXMateria(mat.getIdMateria())){
+           
+                    modelo.addRow(new Object[]{
+                    al.getIdAlumno(),
+                    al.getDni(),
+                    al.getApellido(),
+                    al.getNombre(),});
+          }
+    }//GEN-LAST:event_jCseleccionMatActionPerformed
 private void armarCabecera(){
     modelo.addColumn("ID");
     modelo.addColumn("DNI");
@@ -149,7 +171,7 @@ private void borrarFilas(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jCseleccionMat;
+    private javax.swing.JComboBox<Materia> jCseleccionMat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

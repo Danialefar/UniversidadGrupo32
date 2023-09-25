@@ -201,10 +201,9 @@ public class InscripcionData {
         return materias;
     }
     
-    public List<Alumno> obtenerAlumnoXMateria(int idMateria){
+     public List<Alumno> obtenerAlumnoXMateria(int idMateria){
        ArrayList<Alumno> alumnosMaterias = new ArrayList<>();
-       String sql="SELECT a.idAlumno,dni,nombre,apellido,fechadenacimiento,estado"
-               + "FROM inscripcion i,alumno a WHERE i.idAlumno=a.alumno AND idMateria=? AND a.estado=1";
+       String sql="SELECT alumno.idAlumno,alumno.dni,alumno.nombre,alumno.apellido,alumno.fechadenacimiento,alumno.estado FROM inscripcion ,alumno  WHERE inscripcion.idAlumno=alumno.idAlumno AND (idMateria=? AND alumno.estado=1)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
              ps.setInt(1, idMateria);
@@ -218,7 +217,7 @@ public class InscripcionData {
                  alu.setActivo((rs.getBoolean("estado")));
                  alumnosMaterias.add(alu);
              }
-             ps.close();;
+             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA" + ex.getMessage());
         }
