@@ -229,21 +229,21 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
-        
-        if (jRestado.isSelected()==false){
+
+        if (jRestado.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "EL ALUMNO YA ESTA DADO DE BAJA");
             jTdocumento.setText("");
-                jTapellido.setText("");
-                jTnombre.setText("");
-                jRestado.setSelected(false);
-                jDfecha.setDate(null);
+            jTapellido.setText("");
+            jTnombre.setText("");
+            jRestado.setSelected(false);
+            jDfecha.setDate(null);
 
-                jTapellido.setEnabled(false);
-                jTnombre.setEnabled(false);
-                jRestado.setEnabled(false);
-                jDfecha.setEnabled(false);
-                jBeliminar.setEnabled(false);
-                jBguardar.setEnabled(false);
+            jTapellido.setEnabled(false);
+            jTnombre.setEnabled(false);
+            jRestado.setEnabled(false);
+            jDfecha.setEnabled(false);
+            jBeliminar.setEnabled(false);
+            jBguardar.setEnabled(false);
         } else {
 
             AlumnoData aluD = new AlumnoData();
@@ -294,21 +294,22 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 } else {
                     jRestado.setSelected(false);
                 }
-            }else{
-                                jBguardar.setEnabled(false);
-                                jBeliminar.setEnabled(false);
-                                jTapellido.setEnabled(false);
-                                jTnombre.setEnabled(false);
-                                jRestado.setEnabled(false);
-                                jDfecha.setEnabled(false);
-                                
-              
-             
-          } 
-            
+            } else {
+                jBguardar.setEnabled(false);
+                jBeliminar.setEnabled(false);
+                jTapellido.setEnabled(false);
+                jTnombre.setEnabled(false);
+                jRestado.setEnabled(false);
+                jDfecha.setEnabled(false);
+            }
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "EL DNI INGRESADO NO CORRESPONDE A UN NUMERO VALIDO");
+            jTapellido.setEnabled(false);
+            jTnombre.setEnabled(false);
+            jRestado.setEnabled(false);
+            jDfecha.setEnabled(false);
+            jBeliminar.setEnabled(false);
         }
     }//GEN-LAST:event_jBbuscarActionPerformed
 

@@ -263,7 +263,10 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 }
             }else {
                 jTidMateria.setText("");
-              
+                jTnombreMat.setText("");
+                jTaño.setText("");
+                jRestadoMat.setSelected(false);
+                jBnuevoMat.setEnabled(true);
             } 
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "CODIGO NO ES UN NÚMERO VALIDO");
