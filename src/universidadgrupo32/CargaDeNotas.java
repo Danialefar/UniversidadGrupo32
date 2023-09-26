@@ -216,8 +216,8 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             Alumno alumno = (Alumno) jCseleccionAluNotas.getSelectedItem();
 
             int idMateria = (Integer) modelo.getValueAt(filaSelec, 0);
-            String notaTabla = (String) modelo.getValueAt(filaSelec, 2);
-            double nota = Double.parseDouble(notaTabla);
+//            String notaTabla = (String) modelo.getValueAt(filaSelec, 2);
+            double nota = Double.parseDouble((String) modelo.getValueAt(filaSelec, 2));
             insD.actualizarNota(alumno.getIdAlumno(), idMateria, nota);
             borrarFilas();
 
@@ -236,7 +236,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             double nota = Double.parseDouble(notaNueva);
 
             if (filaSelec != -1) {
-                if (nota > 1 && nota <= 10) {
+                if (nota >= 1 && nota <= 10) {
                     modelo.setValueAt(jTnuevaNota.getText(), jTnotas.getSelectedRow(), 2);
                     jTnuevaNota.setText("");
                 } else {

@@ -10,7 +10,7 @@ import universidadgrupo32entidades.Alumno;
 import universidadgrupo32entidades.Inscripcion;
 import universidadgrupo32entidades.Materia;
 
-public class UniversidadGrupo32 {
+public class UniversidadGrupo32 {  
 
     public static void main(String[] args) {
 

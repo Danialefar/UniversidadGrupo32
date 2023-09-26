@@ -72,7 +72,7 @@ public class MateriaData {
     }
 
     public boolean buscarMateriaNombreAno(String mat, int anio) {
-
+        boolean retorno=false;
         String sql = "SELECT nombre,año FROM materia WHERE nombre = ? AND año = ?";
         Materia materia = null;
         try {
@@ -83,14 +83,15 @@ public class MateriaData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ps.close();
-                return true;
+                retorno= true;
 
             }
             ps.close();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia ");
         }
-        return false;
+        return retorno;
     }
 
     public void modificarMateria(Materia materia) {
