@@ -38,11 +38,11 @@ public class InscripcionData {
 
             if (rs.next()) {
                 inscripcion.setIdInscripcion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "ISCRIPCION AÑADIDA CON EXITO");
+                JOptionPane.showMessageDialog(null, "INSCRIPCIÓN REALIZADA CON EXITO");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" + ex.getMessage());
         }
 
     }
@@ -56,11 +56,11 @@ public class InscripcionData {
             ps.setInt(3,idMateria );
             int filas=ps.executeUpdate();
             if (filas>0){
-                JOptionPane.showMessageDialog(null, "Nota actualizada");
+                JOptionPane.showMessageDialog(null, "NOTA ACTUALIZADA EXITOSAMENTE");
             }    
                     
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" + ex.getMessage());
         }
     }
 
@@ -73,10 +73,10 @@ public class InscripcionData {
             ps.setInt(2,idMateria);
             int filas=ps.executeUpdate();
             if (filas>0){
-                JOptionPane.showMessageDialog(null, "Se elimino la inscripcion");}
+                JOptionPane.showMessageDialog(null, "SE ELIMINÓ LA INSCRIPCIÓN");}
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" + ex.getMessage());
         }
     }        
             
@@ -100,7 +100,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" );
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" );
         }
         return inscripciones;
     }
@@ -125,7 +125,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" );
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" );
         }
         return inscripciones;
     }
@@ -151,7 +151,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" );
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" );
         }
         return inscripciones;
     }
@@ -172,7 +172,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" );
+           JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" );
         }
         return mat ;   
     }
@@ -181,7 +181,8 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasNoCursadas(int idAlumno) {
         ArrayList<Materia> materias = new ArrayList<>();
 
-        String sql = "SELECT * FROM materia WHERE estado = 1 AND idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE idAlumno= ?)";
+        String sql = "SELECT * FROM materia WHERE estado = 1 "
+                + "AND idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE idAlumno= ?)";
         try {
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -196,7 +197,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCION" );
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA INSCRIPCIÓN" );
         }
         return materias;
     }
